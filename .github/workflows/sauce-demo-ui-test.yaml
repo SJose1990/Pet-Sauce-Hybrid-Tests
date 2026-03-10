@@ -1,0 +1,39 @@
+name: LIVE SAUCE DEMO UI Tests
+on:
+  push:
+    branches: [ main, master ]
+ 
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Install pnpm
+      run: npm install -g pnpm
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+
+    - name: Run UI tests
+      run: xvfb-run pnpm run test:ui:live
+      env:
+        TEST_ENV: LIVE
+        BROWSER_TYPE: chrome
+
+    - name: Upload UI Report & Evidence
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: ui-test-report
+        path: test-output/
+        retention-days: 30

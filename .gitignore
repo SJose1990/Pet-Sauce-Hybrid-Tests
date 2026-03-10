@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+.pnpm-debug.log*
+
+# Test Results & Reports
+html-report/
+test-results/
+videos/
+screenshots/
+junit.xml
+
+# IDE & OS
+.vscode/
+.idea/cat .gitignore
+.DS_Store
+dist/

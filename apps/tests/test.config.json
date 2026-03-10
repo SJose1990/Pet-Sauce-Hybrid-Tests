@@ -1,0 +1,6 @@
+{
+  "env": "LIVE",
+  "browserType": "chromium",
+  "browserHeadless": false,
+  "browserRecordVideo": true  
+}
